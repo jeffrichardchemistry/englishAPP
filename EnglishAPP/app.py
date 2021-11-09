@@ -8,8 +8,10 @@ ABSOLUT_PATH = os.path.dirname(os.path.realpath(__file__))
 
 class BackEnd:
     def __init__(self):
+        self.sampled_words_path = '{}/sorted_words.dat'.format(ABSOLUT_PATH)
         self.df = BackEnd.__runData(self)
         self.words_sampleds = BackEnd.__loadCollectedWords(self)
+        
     
     @st.cache(allow_output_mutation=True)
     def __runData(self):
@@ -19,7 +21,7 @@ class BackEnd:
         return df
     
     def __loadCollectedWords(self):
-        path = 'sorted_words.dat'
+        path = self.sampled_words_path
         f = open(path, 'r')
         word_list = f.read()
         f.close()
@@ -37,12 +39,12 @@ class BackEnd:
     
     def storeWords(self, words_list):
         for i in words_list:
-            f = open('sorted_words.dat', 'a')
+            f = open(self.sampled_words_path, 'a')
             f.write('{}\n'.format(i))
             f.close()
             
     def clearWords(self):
-        f = open('sorted_words.dat', 'w')
+        f = open(self.sampled_words_path, 'w')
         f.write('')
         f.close()
     
