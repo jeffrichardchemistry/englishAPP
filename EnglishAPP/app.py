@@ -2,6 +2,9 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import time
+import os
+
+ABSOLUT_PATH = os.path.dirname(os.path.realpath(__file__))
 
 class BackEnd:
     def __init__(self):
@@ -10,7 +13,7 @@ class BackEnd:
     
     @st.cache(allow_output_mutation=True)
     def __runData(self):
-        path = 'data/db.csv'
+        path = '{}/data/db.csv'.format(ABSOLUT_PATH)
         df = pd.read_csv(path)
         
         return df
